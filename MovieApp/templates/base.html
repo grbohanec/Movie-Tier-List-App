@@ -1,0 +1,35 @@
+<!-- base for every page -->
+{% load static %}
+<!doctype html>
+<html lang="en" >
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap_css/bootstrap.min.css' %}">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href= "{% static 'nav_bar.css' %}">
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'home_page.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'show_movie.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'search.css' %}">
+  
+    
+    <title> Movie Rank</title>
+    
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="container-fluid">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script src="{% static 'bootstrap_js/bootstrap.bundle.min.js' %}"></script>
+
+
+  </body>
+</html>

@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Movies...</h1>
+<br/>
+<table class="table table-bordered table-striped table-hover">
+   
+    {% for movie in movie_list %}
+        <tr>
+            <td>
+                <a href="{% url 'show-movies' movie.movie_id %}"><img src="{{ movie.url }}"></a>
+            </td>
+           <td align="right">
+                <a href="{% url 'update-movies' movie.movie_id %}"class="btn btn-outline-secondary btn-sm">Update</a>
+           </td>
+            
+        </tr>
+    {% endfor %}
+</table>
+ 
+{% endblock %}

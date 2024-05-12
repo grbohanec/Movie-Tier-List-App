@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title> Edit User Tier List </title>
+        <link rel="stylesheet" href= "{% static 'nav_bar.css' %}">
+    </head>
+        {% block content %}
+        <h2>
+            {{ tierlist.name  }}
+        </h2>
+        
+        <link rel="stylesheet" type="text/css" href= "{% static 'edit_user_tierlist.css' %}">
+        
+        <div class="dragdrop">
+        <div id="board">
+        <div class="row" id="S">
+            <div class="label" style="background-color: green;"> S </div>
+            {%for movie in ranked_movie_ids%}
+                {% if movie.tier_ranking_row == "S" and movie.tier_list_id == tierlist %}
+                <img class="movie_card" src={{movie.watched_movie_id.url}} id="{{movie.watched_movie_id.watched_movie_id}}" draggable="true">
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="row" id="A">
+            <div class="label" style="background-color: lightgreen;"> A</div>
+            {%for movie in ranked_movie_ids%}
+                {% if movie.tier_ranking_row == "A" and movie.tier_list_id == tierlist%}
+                    <img class="movie_card" src={{movie.watched_movie_id.url}} id="{{movie.watched_movie_id.watched_movie_id}}" draggable="true">
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="row" id="B">
+            <div class="label" style="background-color: yellow;"> B </div>
+            {%for movie in ranked_movie_ids%}
+            {% if movie.tier_ranking_row == "B" and movie.tier_list_id == tierlist%}
+                <img class="movie_card" src={{movie.watched_movie_id.url}} id="{{movie.watched_movie_id.watched_movie_id}}" draggable="true">
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="row" id="C">
+            <div class="label" style="background-color: orange;"> C </div>
+            {%for movie in ranked_movie_ids%}
+            {% if movie.tier_ranking_row == "C" and movie.tier_list_id == tierlist%}
+                <img class="movie_card" src={{movie.watched_movie_id.url}} id="{{movie.watched_movie_id.watched_movie_id}}" draggable="true">
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="row" id="D">
+            <div class="label" style="background-color: pink;"> D </div>
+            {%for movie in ranked_movie_ids%}
+            {% if movie.tier_ranking_row == "D" and movie.tier_list_id == tierlist%}
+                <img class="movie_card" src={{movie.watched_movie_id.url}} id="{{movie.watched_movie_id.watched_movie_id}}" draggable="true">
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="row" id="F">
+            <div class="label"style="background-color: red;"> F </div>
+            {%for movie in ranked_movie_ids%}
+            {% if movie.tier_ranking_row == "F" and movie.tier_list_id == tierlist%}
+                <img class="movie_card" src={{movie.watched_movie_id.url}} id="{{movie.watched_movie_id.watched_movie_id}}" draggable="true">
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        </div>
+        <br>
+
+        <div id="movies_window">
+            {%for movie in unranked_movies%}
+                <img class="movie_card" src={{movie.url}} id="{{movie.watched_movie_id}}" draggable="true">
+            {% endfor %}
+        </div>
+
+    </div>
+
+        <br>
+    
+        <script src="{% static 'rows.js' %}"></script>
+        <script src="{% static 'movie_cards.js' %}"></script>
+{% endblock %}

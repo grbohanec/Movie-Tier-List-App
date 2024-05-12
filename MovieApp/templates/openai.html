@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatGPT Question Box</title>
+</head>
+<body>
+    <input type="text" id="questionBox" placeholder="Ask ChatGPT a question...">
+    <button onclick="submitQuestion()">Ask</button>
+    <div id="responseLabel">Response will appear here</div>
+
+    <script>
+        function submitQuestion() {
+            const question = document.getElementById('questionBox').value;
+            fetch('/chatgpt-response/', {
+                method: 'POST',
+                body: new URLSearchParams({'question': question}),
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('responseLabel').innerText = data.response || 'Error: ' + data.error;
+            });
+        }
+
+        // Function to get CSRF token
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+</body>
+</html>
+
+{% endblock %}

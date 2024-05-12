@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+<body>
+
+
+<button type='submit'> Add</button>
+<button type='submit'>Delete</button>
+
+<! -- Change photo.id with the unique identifier for the photo ie database ID from the database they are stored in-->
+<form action="{% url 'delete_movie_image' photo.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Delete" onclick="return confirm('Are you sure?');">
+</form>
+
+
+</body>
+</head>

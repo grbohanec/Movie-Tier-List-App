@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins");
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+  display: flex;
+  height: 100vh;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  background:url("/static/movie-background.avif") no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+.login-form{
+  width: 420px;
+  background: transparent;
+  border: 2px solid rgba(255,255,255,.2);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0,0,0,.2);
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
+}
+.error-container {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px; /* Adjust the margin as needed */
+  color: red; /* Optional: Customize the color of the error message */
+}
+.text{
+  font-size: 30px;
+  color: #000000;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+form .field{
+  margin-top: 20px;
+  display: flex;
+}
+.field .fas{
+  height: 50px;
+  width: 60px;
+  color: #000000;
+  font-size: 20px;
+  line-height: 50px;
+  border: 1px solid #444;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  background: linear-gradient(#097087,#254caf);
+}
+.field input,form button{
+  height: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 19px;
+  font-family: "Poppins", sans-serif;
+  color: #000000;
+  padding: 0 15px;
+  border-radius: 0 5px 5px 0;
+  border: 1px solid #000000;
+  caret-color: #254caf;
+  background: linear-gradient(#ffffff,#ffffff); 
+}
+
+button{
+  margin-top: 30px;
+  border-radius: 5px!important;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+}
+button:hover{
+  color: #254caf;
+  border: 1px solid #254caf;
+  box-shadow: 0 0 5px rgba(18, 1, 254, 0.8),
+              0 0 10px rgba(18,1,254,0.7),
+              0 0 15px rgba(18,1,234,0.6),
+              0 2px 0 black;
+}
+.signup-link{
+  font-size:14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+}
+.signup-link a{
+  color:#fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.signup-link a:hover{
+  text-decoration: underline;
+}

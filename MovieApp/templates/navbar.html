@@ -1,0 +1,21 @@
+{% load static %}
+<nav>
+    <ul class="menu">
+        <li><a href="{% url 'home_page' %}">Home</a></li>
+        <li><a href="{% url 'user_tierlists' %}">Tier Lists</a></li>
+    </ul>
+
+    <div class="search">
+        <form class="d-flex" method=POST action="{% url 'search-movies' %}">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Search Movies" aria-label="Search" name="searched">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+    </div>
+    
+    <form class="ms-auto" method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="btn btn-outline-light" type="submit">Logout</button>
+    </form>
+
+</nav>

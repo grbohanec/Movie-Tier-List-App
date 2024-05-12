@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <link rel="stylesheet" type="text/css" href="{% static 'user_tier.css' %}">
+
+    <div class="container ">
+        <div class=" row">
+            <div class="col">
+                <p style="font-weight:bold; font-size:20px; margin-top: 1em;">Create New Tier List:</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="input-group mb-3" style="width:300px;">
+                        <input class="form-control" type="text" name="name" placeholder="Tier List Name">
+                        <button class="btn btn-outline-dark" type="submit" name="action" value="create">Create</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col">
+                <p style="font-weight:bold; font-size:20px; margin-top: 1em;">Delete Tier List:</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="input-group mb-3" style="width:300px;">
+                        <select class="form-select" name="tierlist_id">
+                            {% for tierlist in tierlists %}
+                            <option value="{{ tierlist.tier_list_id }}">{{ tierlist.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-outline-dark" type="submit" name="action" value="delete">Delete</button>
+                    </div>
+                </form>
+            </div>
+    
+            <div class="col">
+                <p style="font-weight:bold; font-size:20px; margin-top: 1em;">Rename Tier List:</p>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="input-group mb-3" style="width:400px;">
+                        <select class="form-select" name="tierlist_id">
+                            {% for tierlist in tierlists %}
+                            <option value="{{ tierlist.tier_list_id }}">{{ tierlist.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input class="form-control" type="text" name="name" placeholder="New Name">
+                        <button class="btn btn-outline-dark" type="submit" name="action" value="rename">Rename</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+
+
+<div class="tierlist-section">
+    <br/>
+    <h1>Your Tier Lists:</h1>
+           
+    <ul>
+        {% for tierlist in tierlists %}
+        <li>
+            <h2><a href="{% url 'edit_user_tierlist' tierlist_id=tierlist.tier_list_id %}">{{ tierlist.name }}</a></h2>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

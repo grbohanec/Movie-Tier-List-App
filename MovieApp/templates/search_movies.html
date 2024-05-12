@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+        {% if searched %}
+            <h1>You Searched For {{ searched }}</h1>
+            <br/>
+            <table border="1">
+                <tr class="search-list">
+                    {% for movie in movies %}
+                        <td class="search-box">
+                            <a href="{% url 'show-movies' movie.movie_id %}"><img src="{{ movie.url }}" class="search-img"></a>
+                            <p>{{ movie.title }}</p>
+                        </td>
+                    {% endfor %}
+                </tr>
+            </table>
+
+        {% else %}
+            <h1> You Forgot To Seach For A Movie...</h1>
+        {% endif %}
+    
+{% endblock %}
+

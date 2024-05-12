@@ -1,0 +1,7 @@
+Django==5.0.1
+gunicorn
+psycopg2-binary  # PostgreSQL database adapter for Python (if using PostgreSQL)
+Pillow
+openai
+requests>=2.25.1
+tmdbsimple

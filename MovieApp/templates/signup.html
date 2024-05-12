@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="utf-8">
+      <title>Sign Up</title>
+      <link rel="stylesheet" href= "{% static 'signup_style.css' %}" >
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+      <div class="login-form">
+         <h1>Sign Up Habibi</h1>
+         <form method="POST" action="{% url 'sign_up' %}">
+            {% csrf_token %}
+            <div class="field">
+                <div class="fas fa-user"></div>
+                {{form.username}}
+             </div>
+             <div class="error-container">
+               {% for error in form.errors.username %}
+                  {{ error }}
+               {% endfor %}
+               </div>
+            <div class="field">
+               <div class="fas fa-envelope"></div>
+               {{form.email}}
+            </div>
+            <div class="error-container">
+            {% for error in form.errors.email %}
+               {{ error }}
+            {% endfor %}
+            </div>
+            <div class="field">
+                <div class="fas fa-lock"></div>
+                {{form.password1}}
+             </div>
+             <div class="error-container">
+             {% for error in form.errors.password1 %}
+             {{ error }}
+             {% endfor %}
+            </div>
+             <div class="field">
+                <div class="fas fa-lock"></div>
+                {{form.password2}}
+             </div>
+             <div class="error-container">
+             {% for error in form.errors.password2 %}
+             {{ error }}
+             {% endfor %}
+            </div>
+         
+             <button type="submit">Create Account</button>
+         </form>
+         <br>
+         <div class="signup-link">
+            Already have an account? <a href="{% url 'login_page' %}">Login in here</a>
+         </div>
+      </div>
+      
+      <script> 
+      var form_fields = document.getElementsByTagName('input')
+      form_fields[1].placeholder='Username..';
+      form_fields[2].placeholder='Email..';
+      form_fields[3].placeholder='Enter password...';
+      form_fields[4].placeholder='Re-enter Password...';
+      for (var field in form_fields){	
+      form_fields[field].className += ' form-control'
+      }
+      </script>
+   </body>
+</html>

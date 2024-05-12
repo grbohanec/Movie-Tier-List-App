@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+
+.cast-card {
+    margin: 4px; 
+    padding: 5px; 
+    height: 150px;
+    width: 105px; 
+    background-color: white;
+  }
+.cast-name {
+  font-size: 0.8vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.role-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.role-container .director {
+  margin-bottom: 10px;
+  width: 70%;
+  height: auto;
+  box-shadow: -4px 4px 5px 0 #000;
+}
+
+.role-container .actor {
+  margin-bottom: 5px;
+  width: 70%;
+  height: auto;
+  box-shadow: -4px 4px 5px 0 #000;
+}
+
+.role-container .rowcast {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 120%;
+    min-height: 150px;
+}
+
+</style>
+
+<center>
+<div class="container movie-details">
+  <div class="row">
+    <div class="col-md-6 left-box">
+      <h1 style="font-weight:bold">{{ movie.title }}</h1>
+      <h2 style="font-weight:bold">{{movie.tagline}}</h2>
+      <p>{{ movie.overview }}</p>
+      <p>Original Language: {{ movie.original_language }}</p>
+      <p>Original Title: {{ movie.original_title }}</p>
+      <p>Release Date: {{ movie.release_date }}</p>
+      <p>Runtime: {{ movie.runtime }} minutes</p>
+      <p>Budget: ${{ movie.budget }}</p>
+      <p>Revenue: ${{ movie.revenue }}</p>
+      <p><u>Director(s)</u></p>
+      <div class="role-container">
+        <div class="rowcast">
+          {% for director in directors %}
+          <div class="col-md-2">
+            <div class="cast-card">
+              {% if director.url != "http://image.tmdb.org/t/p/w500None" %}
+                <img src="{{ director.url }}" class="director">
+              {% else %}
+                <img src="{% static 'defaultpfp.jpg' %}" class="director">
+              {% endif %}
+            <p class="cast-name">{{ director.director_name }}</p>
+            </div>
+          </div>
+          {% endfor %}
+          </div>
+          </div>
+      <p><u>Cast</u></p>
+      <div class="role-container">
+        <div class="rowcast">
+          {% for actor in cast %}
+            <div class="col-md-2">
+              <div class="cast-card">
+              <img src="{{ actor.url }}" class="actor">
+              <p class="cast-name">{{actor.actor_name}}</p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+
+      {%if exists == False%}
+        <form method="POST" action="{%url 'show-movies' movie.movie_id %}" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">Add to watched</button>
+        </form>
+      {% else %}
+        <div class="alert alert-info" role="alert">On your watched list—tier list it!</div>      
+      {% endif %}
+    </div>
+    <div class="col-md-6">
+      <img src="{{ movie.url }}" class="movie-img">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <h3>Recommended Movies</h3>
+  <table>
+    <tr class="rec-list">
+      {% for movie in recommended_movies %}
+        <td class="rec-box">
+          <a href="{% url 'show-movies' movie.movie_id %}"><img src="{{ movie.url }}" alt="{{ movie.title }}" class="rec-img"></a>
+        </td>
+      {% endfor %}
+    </tr>
+  </table>
+</div>
+  
+
+</center>
+
+  
+{% endblock %}
